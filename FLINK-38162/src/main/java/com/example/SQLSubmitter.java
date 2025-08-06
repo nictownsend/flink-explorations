@@ -73,7 +73,7 @@ public class SQLSubmitter {
     FROM (
         SELECT * FROM TABLE(TUMBLE(TABLE leftTable, DESCRIPTOR(row_time), INTERVAL '5' SECONDS))
     ) L
-    LEFT JOIN (
+    FULL JOIN (
         SELECT * FROM TABLE(TUMBLE(TABLE rightTable, DESCRIPTOR(row_time), INTERVAL '5' SECONDS))
     ) R
     ON L.version = R.version AND L.window_start = R.window_start AND L.window_end = R.window_end AND L.window_time = R.window_time;       
